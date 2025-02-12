@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_event_root"
+              web_icon="event_management,static/description/events.png"
+              name="Events"
+              sequence="0"/>
+    <menuitem id="menu_event_master"
+              name="Events Details"
+              parent="menu_event_root"
+              action="event_management_id"
+              sequence="1"/>
+</odoo>

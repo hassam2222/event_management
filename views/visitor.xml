@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="event_visitor_id" model="ir.actions.act_window">
+        <field name="name">Event visitor</field>
+        <field name="res_model">event.visitor</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="event_visitor_tree" model="ir.ui.view">
+        <field name="name">event.visitor.tree</field>
+        <field name="model">event.visitor</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="phone"/>
+                <field name="email"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="event_visitor_form" model="ir.ui.view">
+        <field name="name">event.visitor.form</field>
+        <field name="model">event.visitor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="event_id"/>
+                            <field name="name"/>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                </sheet>
+                 <group>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_visitors"
+              name="Visitors"
+              parent="menu_event_root"
+              action="event_visitor_id"
+              sequence="2"/>
+</odoo>

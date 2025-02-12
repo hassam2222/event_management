@@ -1,0 +1,64 @@
+<odoo>
+    <template id="report_event_gate_pass_temp">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="font-family: Arial, sans-serif; padding: 20px;">
+                        <div style="text-align: left; padding-bottom: 20px;">
+                            <h2 style="margin-top: 10px; font-size: 24px;">Gate Pass</h2>
+                            <p style="font-size: 18px; font-weight: bold;">Event:
+                                <span t-field="o.event_id.name"/>
+                            </p>
+                        </div>
+
+                        <div style="width:100%;border-top: 2px solid #000;">
+                            <div style="float:left;width: 50%; font-size: 16px;">
+                                <p>
+                                    <strong>Name:</strong>
+                                    <span t-if="o.role == 'creator'">
+                                        <span t-field="o.creator_id.name"/>
+                                    </span>
+                                    <span t-if="o.role == 'visitor'">
+                                        <span t-field="o.visitor_id.name"/>
+                                    </span>
+                                </p>
+                                <p>
+                                    <strong>Company:</strong>
+                                    <span t-field="o.company_id.name"/>
+                                </p>
+                                <p>
+                                    <strong>Role:</strong>
+                                    <span t-field="o.role"/>
+                                </p>
+                                <p>
+                                    <strong>Date From:</strong>
+                                    <span t-field="o.datefrom"/>
+                                </p>
+                                <p>
+                                    <strong>Date To:</strong>
+                                    <span t-field="o.dateto"/>
+                                </p>
+                            </div>
+                            <div style="float:right;width: 40%; text-align: center;">
+                                <p style="font-size: 14px;">Scan the QR code for quick verification:</p>
+                                <div class="qr-code">
+                                    <img t-att-src="'/report/barcode/QR/%s %s' % (o.event_id.name,o.role)"
+                                         style="display: block; width: 150px; height: 150px; margin: auto;"/>
+                                </div>
+                            </div>
+                            <br style="clear:both;float:none;"/>
+                            <br style="clear:both;float:none;"/>
+                        </div>
+                        <br style="clear:both;float:none;"/>
+                        <br style="clear:both;float:none;"/>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <p style="font-size: 14px;">This Gate Pass is issued for the event listed above.</p>
+                            <p style="font-size: 14px;">For inquiries, contact: 03435122448</p>
+                        </div>
+                    </div>
+                    <div style="page-break-after: always;page-break-before: avoid;"></div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

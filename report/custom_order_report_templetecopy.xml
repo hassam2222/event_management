@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_template_copy_sale" model="ir.actions.report">
+        <field name="name">Custom Order Template</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">event_management.report_customsaleorder_temp_copy</field>
+        <field name="report_file">event_management.report_customsaleorder_temp_copy</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="report_customsaleorder_temp_copy">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <div style="border-top: 2px solid black; text-align: center; padding: 5px;">
+                            <h2 style="font-weight: bold;">QUOTATION</h2>
+                        </div>
+
+                        <br/>
+                        <div class="row">
+                            <div class="col-6 me-3"
+                                 style=" width: 60%; text-align: left; border: 2px solid black; padding: 10px;">
+                                <strong>Shipper</strong>
+                                <hr/>
+                                <span>Company Name:</span>
+                                <br/>
+                                <span>Company Address:</span>
+                                <br/>
+                                <span>Contact:</span>
+                                <br/>
+                                <span>CNIC:</span>
+                                <br/>
+                                <span>Email:</span>
+                                <br/>
+                            </div>
+                            <div class="col-6"
+                                 style=" width: 60%; text-align: left; border: 2px solid black; padding: 10px;">
+                                <strong>Receiver</strong>
+                                <hr/>
+                                <span>Name:</span>
+                                <br/>
+                                <span>Address:</span>
+                                <br/>
+                                <span>Cell:</span>
+                                <br/>
+                                <span>Email:</span>
+                                <br/>
+                                <span>GSTIN:</span>
+                                <br/>
+                            </div>
+                        </div>
+                        <br/>
+                        <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+                            <thead>
+                                <tr style="border: 2px solid black; background-color: #f2f2f2;">
+                                    <th>#</th>
+                                    <th>Product</th>
+                                    <th>UoM</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Taxes</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.order_line" t-as="line">
+                                    <tr style="border: 2px solid black;">
+                                        <td>
+                                            <t t-esc="line.sequence or ''"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.product_uom.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.product_uom_qty"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.price_unit"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="', '.join(line.tax_id.mapped('name'))"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="line.price_subtotal"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <br/>
+                        <table style="width: 100%; border: 1px solid black;">
+                            <tr style="border: 2px solid black;">
+                                <td style="width: 70%; font-weight: bold;">Subtotal</td>
+                                <td style="width: 30%; text-align: right;">&#8377;
+                                    <t t-esc="doc.amount_untaxed"/>
+                                </td>
+                            </tr>
+                            <tr style="border: 2px solid black;">
+                                <td style="font-weight: bold;">Tax</td>
+                                <td style="text-align: right;">&#8377;
+                                    <t t-esc="doc.amount_tax"/>
+                                </td>
+                            </tr>
+                            <tr style="border: 2px solid black; background-color: #d1e7dd;">
+                                <td style="font-weight: bold;">Final Amount</td>
+                                <td style="text-align: right; font-weight: bold;">&#8377;
+                                    <t t-esc="doc.amount_total"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <div style="border-top: 2px solid black; margin-top: 20px; text-align: center; font-weight: bold;">
+                            <p>Declaration:</p>
+                            <p>Thanks for business with us!!! Please visit us again !!!</p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
