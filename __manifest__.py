@@ -14,6 +14,7 @@
         'views/visitor.xml',
         'views/creator.xml',
         'views/gatepass.xml',
+        'views/ok.xml',
         'report/report.xml',
         'report/gatepass_report.xml',
         'report/custom_order_report.xml',

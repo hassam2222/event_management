@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ok_creator_id" model="ir.actions.act_window">
+        <field name="name">Event Creator</field>
+        <field name="res_model">event.creator</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="event_creator_tree" model="ir.ui.view">
+        <field name="name">event.creator.tree</field>
+        <field name="model">event.creator</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="phone"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="event_creator_form" model="ir.ui.view">
+        <field name="name">event.creator.form</field>
+        <field name="model">event.creator</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="event_id"/>
+                            <field name="name"/>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="industry"/>
+                        </group>
+                    </group>
+                </sheet>
+                <group>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="ok_creators"
+              name="ok Creators"
+              parent="menu_event_root"
+              action="ok_creator_id"
+              sequence="3"/>
+</odoo>
